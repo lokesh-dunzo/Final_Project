@@ -4,8 +4,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.example.myapplication.Model.Dog
+import com.example.myapplication.Repository.DogEntity
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.example.myapplication.databinding.RecylerImageBinding
 
@@ -14,14 +16,14 @@ class MainViewHolder(val binding: RecylerImageBinding) : RecyclerView.ViewHolder
 }
 
 class Adaptor : RecyclerView.Adapter<MainViewHolder>() {
-    var dogList =  mutableListOf<Dog>()
+    var dogList =  mutableListOf<DogEntity>()
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         val dog = dogList[position]
         Glide.with(holder.itemView.context).load(dog.message)
             .into(holder.binding.imageview)
     }
 
-    fun setList(list : List<Dog>){
+    fun setList(list : List<DogEntity>){
         this.dogList = list.toMutableList()
         notifyDataSetChanged()
     }

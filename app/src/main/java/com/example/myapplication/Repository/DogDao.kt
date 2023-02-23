@@ -9,8 +9,11 @@ import androidx.room.Query
 @Dao
 interface DogDao {
     @Insert
-    fun insert(dogEntity: DogEntity)
+    fun insertDog(dogEntity: DogEntity)
 
     @Query("select * from DOG")
     fun getAllDog(): LiveData<List<DogEntity>>
+
+    @Query("DELETE FROM DOG")
+    fun nukeTable()
 }

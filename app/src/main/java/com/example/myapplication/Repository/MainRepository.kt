@@ -43,4 +43,6 @@ class MainRepository(private val retroFitClient: RetroFitClient,private val dogD
     }
 
     fun getPicsFromDB() = dogDataBase.dogDao().getAllDog()
+    fun insertDog(dogEntity: DogEntity) = dogDataBase.dogDao().insertDog(dogEntity)
+    fun clearTable() = dogDataBase.dogDao().nukeTable()
 }
