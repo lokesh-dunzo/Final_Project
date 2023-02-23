@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    >
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageview"
+        android:layout_width="300dp"
+        android:scaleType="centerCrop"
+        android:layout_height="300dp"
+        tools:ignore="MissingConstraints"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        />
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_margin="20dp"
+        android:layout_gravity="center"
+        android:text="Fetch New Dog"
+        android:id="@+id/fetch_new_dog"
+        />
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="horizontal"
+        android:id="@+id/recycler_view"
+        tools:listitem="@layout/recyler_image"
+        tools:itemCount="5"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:paddingLeft="10px"
+        />
+</androidx.appcompat.widget.LinearLayoutCompat>
