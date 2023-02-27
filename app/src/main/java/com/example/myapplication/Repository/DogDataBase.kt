@@ -6,10 +6,11 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.myapplication.Model.Dog
 import kotlinx.coroutines.GlobalScope
+import javax.inject.Inject
 
 
 @Database(entities = [DogEntity::class], version = 1)
-abstract class DogDataBase : RoomDatabase() {
+abstract class DogDataBase constructor() : RoomDatabase() {
 
     abstract fun dogDao() : DogDao
 

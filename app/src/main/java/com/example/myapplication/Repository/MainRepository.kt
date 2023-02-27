@@ -7,9 +7,10 @@ import com.example.myapplication.RetroFit.RetroFitClient
 import kotlinx.coroutines.runBlocking
 import retrofit2.Call
 import retrofit2.Response
+import javax.inject.Inject
 
 
-class MainRepository(private val retroFitClient: RetroFitClient,private val dogDataBase: DogDataBase) {
+class MainRepository constructor(private val retroFitClient: RetroFitClient,private val dogDataBase: DogDataBase) {
     fun internetIsConnected(): Boolean {
         return try {
             val command = "ping -c 1 google.com"
@@ -22,20 +23,25 @@ class MainRepository(private val retroFitClient: RetroFitClient,private val dogD
 
         var result : Dog = Dog("not fount","not found")
         if(internetIsConnected()){
+            //println("TS");
             var call : Call<Dog> = retroFitClient.getRandomPic()
 
             //here storing data in local data base
             runBlocking {
                 try {
                     val response: Response<Dog> = call.execute()
+                    //println("TS")
                     result = response.body()!!
                 }
                 catch(ex :java.lang.Exception){
+
+                    println(ex.toString())
                     /// Error handlling
                 }
             }
         }
         else{
+            println("Error")
             // Here I will do Local DataBase Work
 
         }

@@ -9,6 +9,7 @@
     android:layout_gravity="center"
     android:orientation="vertical"
     >
+
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageview"
         android:layout_width="300dp"
