@@ -12,9 +12,9 @@ class Module {
     @Provides
     fun provideRetroFitInstance() = RetroFitClient.getRetroFirInstance()
 
-    @Provides
-    fun provideDbInstance() {
+        //@Provides
+    //fun provideDbInstance() {
        //val context = ApplicationProvider.getApplicationContext<Context>()
-        DogDataBase.getInstance(getApplicationContext())
-    }
+      //  DogDataBase.getInstance(getApplicationContext())
+   // }
 }
