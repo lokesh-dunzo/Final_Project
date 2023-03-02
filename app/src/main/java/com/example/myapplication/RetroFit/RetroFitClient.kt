@@ -9,26 +9,24 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import javax.inject.Inject
 
-
-interface RetroFitClient {
+interface RetroFitClient{
     @GET("api/breeds/image/random")
     fun getRandomPic() : Call<Dog>
+}
 
-    companion object{
-        var retroFitInstance : RetroFitClient? = null;
-        fun getRetroFirInstance()  : RetroFitClient{
-            if(retroFitInstance == null){
-                val gson = GsonBuilder()
-                    .setLenient()
-                    .create()
-                val retrofit = Retrofit.Builder()
-                    .baseUrl("https://dog.ceo/")
-                    .addConverterFactory(GsonConverterFactory.create(gson))
-                    .build()
-                retroFitInstance = retrofit.create(RetroFitClient::class.java)
-            }
-            return retroFitInstance!!;
-        }
+object RetroFitClientService {
+    private const val BASE_URL = "https://dog.ceo/"
+    val gson = GsonBuilder()
+        .setLenient()
+        .create()
+    val retrofit = Retrofit.Builder()
+        .baseUrl(BASE_URL)
+        .addConverterFactory(GsonConverterFactory.create(gson))
+        .build()
+
+    // we can create same thing for more API
+    val retroFirService: RetroFitClient by lazy{
+        retrofit.create(RetroFitClient::class.java)
     }
 }
 

@@ -26,6 +26,7 @@
         android:layout_gravity="center"
         android:text="Fetch New Dog"
         android:id="@+id/fetch_new_dog"
+        style="@style/PicStyle"
         />
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

@@ -9,8 +9,8 @@ import dagger.Provides
 
 @dagger.Module
 class Module {
-    @Provides
-    fun provideRetroFitInstance() = RetroFitClient.getRetroFirInstance()
+    //@Provides
+    //fun provideRetroFitInstance() = RetroFitClient.getRetroFirInstance()
 
         //@Provides
     //fun provideDbInstance() {

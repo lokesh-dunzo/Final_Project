@@ -12,12 +12,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
-import com.example.myapplication.RetroFit.RetroFitClient
 import kotlinx.coroutines.launch
 import com.bumptech.glide.Glide
 import com.example.myapplication.RecylerView.Adaptor
 import com.example.myapplication.Repository.DogDataBase
 import com.example.myapplication.Repository.DogEntity
+import com.example.myapplication.RetroFit.RetroFitClientService
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.example.myapplication.notification.MyNotificationService
 import kotlinx.coroutines.Dispatchers
@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         adaptor = Adaptor()
 
-        viewModel = ViewModelProvider(this,MyViewModelFactory(MainRepository(RetroFitClient.getRetroFirInstance(),DogDataBase.getInstance(this)))).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this,MyViewModelFactory(MainRepository(RetroFitClientService.retroFirService,DogDataBase.getInstance(this)))).get(MainViewModel::class.java)
         val notificationService = MyNotificationService(this)
         // code for shred pref
         val sharedPref = getSharedPreferences("myPref", MODE_PRIVATE)
@@ -84,7 +84,7 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerView.adapter = adaptor
     }
     fun fetch_new_image(){
-        lifecycleScope.launch {
+        lifecycleScope.launch(Dispatchers.IO) {
             viewModel.getRandomPic()
         }
     }
