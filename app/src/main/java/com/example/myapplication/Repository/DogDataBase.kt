@@ -4,9 +4,6 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.myapplication.Model.Dog
-import kotlinx.coroutines.GlobalScope
-import javax.inject.Inject
 
 
 @Database(entities = [DogEntity::class], version = 1)

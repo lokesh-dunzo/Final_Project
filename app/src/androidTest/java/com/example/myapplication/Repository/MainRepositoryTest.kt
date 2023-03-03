@@ -2,18 +2,14 @@ package com.example.myapplication.Repository
 
 import Repository.MainRepository
 import android.util.Log
-import androidx.lifecycle.LiveData
 import com.example.myapplication.Model.Dog
 import com.example.myapplication.RetroFit.RetroFitClient
 import com.example.myapplication.RetroFit.RetroFitClientService
 import com.google.common.truth.Truth
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mockito
-import retrofit2.Call
 import org.mockito.Mockito.spy
 
 
@@ -26,9 +22,9 @@ class MainRepositoryTest{
     @Before
     fun init(){
         db = Mockito.mock(DogDataBase :: class.java)
-        val retroFitClient = spy(RetroFitClientService::class.java)
+        val retroFitClient = RetroFitClientService.retroFirService
          //   RetroFitClient.getRetroFirInstance()
-        repository = MainRepository(retroFitClient.retroFirService,db)
+        repository = MainRepository(retroFitClient,db)
     }
 
     @Test

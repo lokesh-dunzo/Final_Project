@@ -1,5 +1,4 @@
 package Repository
-import androidx.room.RoomDatabase
 import com.example.myapplication.Model.Dog
 import com.example.myapplication.Repository.DogDataBase
 import com.example.myapplication.Repository.DogEntity
@@ -7,7 +6,6 @@ import com.example.myapplication.RetroFit.RetroFitClient
 import kotlinx.coroutines.runBlocking
 import retrofit2.Call
 import retrofit2.Response
-import javax.inject.Inject
 
 
 class MainRepository constructor(private val retroFitClient: RetroFitClient,private val dogDataBase: DogDataBase) {
@@ -21,10 +19,10 @@ class MainRepository constructor(private val retroFitClient: RetroFitClient,priv
     }
     fun getRandomPic() : Dog{
 
-        var result : Dog = Dog("not fount","not found")
+        var result = Dog("not fount","not found")
         if(internetIsConnected()){
             //println("TS");
-            var call : Call<Dog> = retroFitClient.getRandomPic()
+            val call : Call<Dog> = retroFitClient.getRandomPic()
 
             //here storing data in local data base
             runBlocking {

@@ -1,14 +1,10 @@
 package com.example.myapplication.RecylerView
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
-import com.example.myapplication.Model.Dog
 import com.example.myapplication.Repository.DogEntity
-import com.example.myapplication.databinding.ActivityMainBinding
 import com.example.myapplication.databinding.RecylerImageBinding
 
 class MainViewHolder(val binding: RecylerImageBinding) : RecyclerView.ViewHolder(binding.root){
