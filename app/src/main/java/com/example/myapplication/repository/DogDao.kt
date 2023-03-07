@@ -1,4 +1,4 @@
-package com.example.myapplication.Repository
+package com.example.myapplication.repository
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

@@ -1,4 +1,4 @@
-package com.example.myapplication.Repository
+package com.example.myapplication.repository
 
 import android.content.Context
 import androidx.room.Database
@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 
 
 @Database(entities = [DogEntity::class], version = 1)
-abstract class DogDataBase constructor() : RoomDatabase() {
+abstract class DogDataBase : RoomDatabase() {
 
     abstract fun dogDao() : DogDao
 

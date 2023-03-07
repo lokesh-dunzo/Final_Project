@@ -4,24 +4,20 @@ import Repository.MainRepository
 import ViewModel.MainViewModel
 import ViewModel.MyViewModelFactory
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import kotlinx.coroutines.launch
 import com.bumptech.glide.Glide
-import com.example.myapplication.RecylerView.Adaptor
-import com.example.myapplication.Repository.DogDataBase
-import com.example.myapplication.Repository.DogEntity
-import com.example.myapplication.RetroFit.RetroFitClientService
+import com.example.myapplication.recylerview.Adaptor
+import com.example.myapplication.repository.DogDataBase
+import com.example.myapplication.repository.DogEntity
+import com.example.myapplication.retrofit.RetroFitClientService
 import com.example.myapplication.databinding.ActivityMainBinding
-import com.example.myapplication.notification.MyNotificationService
 import kotlinx.coroutines.Dispatchers
-import android.annotation.SuppressLint as SuppressLint1
 
 class MainActivity : AppCompatActivity() {
     lateinit var viewModel: MainViewModel
@@ -29,7 +25,6 @@ class MainActivity : AppCompatActivity() {
     lateinit var adaptor: Adaptor
     var list = mutableListOf<DogEntity>()
 
-    @SuppressLint1("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -45,45 +40,26 @@ class MainActivity : AppCompatActivity() {
                 )
             )
         ).get(MainViewModel::class.java)
-        val notificationService = MyNotificationService(this)
-        // code for shred pref
-        val sharedPref = getSharedPreferences("myPref", MODE_PRIVATE)
-        val editor = sharedPref.edit()
+        viewModel.start(this)
 
-        // code for circle while loading pic
-        val circularProgressDrawable = CircularProgressDrawable(this).apply {
-            strokeWidth = 7f
-            centerRadius = 40f
-        }
-        circularProgressDrawable.start()
         val imageView: ImageView = findViewById<View>(R.id.imageview) as ImageView
-
+        val circle = viewModel.getCirle(this)
         viewModel.randomPicData.observe(this, Observer {
             if (it.message != "not fount") {
                 val dogEntity = DogEntity(0, it.message, it.status)
-                list.add(dogEntity)
                 lifecycleScope.launch(Dispatchers.IO) {
                     viewModel.addData(dogEntity)
                 }
                 Glide.with(this).load(it.message)
-                    .placeholder(circularProgressDrawable)
+                    .placeholder(circle)
                     .into(imageView)
-                adaptor.setList(list)
+                adaptor.addDogEntity(dogEntity)
             }
         })
-        fetch_new_image()
+        fetchNewImage()
         binding.fetchNewDog.setOnClickListener(View.OnClickListener {
-            fetch_new_image()
-            var fetchDogs = sharedPref.getInt("fetch_count", 0)
-            fetchDogs++
-            Log.d("fetch", fetchDogs.toString())
-            if (fetchDogs % 10 != 0) {
-                notificationService.createNotification()
-            }
-            editor.apply {
-                putInt("fetch_count", fetchDogs)
-                apply()
-            }
+            fetchNewImage()
+            viewModel.onButtonClickAction()
         })
         viewModel.getAllData().observe(this, Observer {
             list = it.toMutableList()
@@ -92,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerView.adapter = adaptor
     }
 
-    fun fetch_new_image() {
+    fun fetchNewImage() {
         lifecycleScope.launch(Dispatchers.IO) {
             viewModel.getRandomPic()
         }

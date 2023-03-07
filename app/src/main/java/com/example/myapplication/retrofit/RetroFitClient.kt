@@ -1,6 +1,6 @@
-package com.example.myapplication.RetroFit
+package com.example.myapplication.retrofit
 
-import com.example.myapplication.Model.Dog
+import com.example.myapplication.model.Dog
 import com.google.gson.GsonBuilder
 import retrofit2.Call
 import retrofit2.Retrofit

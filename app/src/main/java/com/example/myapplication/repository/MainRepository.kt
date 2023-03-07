@@ -1,8 +1,8 @@
 package Repository
-import com.example.myapplication.Model.Dog
-import com.example.myapplication.Repository.DogDataBase
-import com.example.myapplication.Repository.DogEntity
-import com.example.myapplication.RetroFit.RetroFitClient
+import com.example.myapplication.model.Dog
+import com.example.myapplication.repository.DogDataBase
+import com.example.myapplication.repository.DogEntity
+import com.example.myapplication.retrofit.RetroFitClient
 import kotlinx.coroutines.runBlocking
 import retrofit2.Call
 import retrofit2.Response
@@ -48,5 +48,5 @@ class MainRepository constructor(private val retroFitClient: RetroFitClient,priv
 
     fun getPicsFromDB() = dogDataBase.dogDao().getAllDog()
     fun insertDog(dogEntity: DogEntity) = dogDataBase.dogDao().insertDog(dogEntity)
-    fun clearTable() = dogDataBase.dogDao().nukeTable()
+    //fun clearTable() = dogDataBase.dogDao().nukeTable()
 }

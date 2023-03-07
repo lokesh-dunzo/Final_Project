@@ -1,16 +1,15 @@
-package com.example.myapplication.Repository
+package com.example.myapplication.repository
 
 import Repository.MainRepository
 import android.util.Log
-import com.example.myapplication.Model.Dog
-import com.example.myapplication.RetroFit.RetroFitClient
-import com.example.myapplication.RetroFit.RetroFitClientService
+import com.example.myapplication.model.Dog
+import com.example.myapplication.retrofit.RetroFitClient
+import com.example.myapplication.retrofit.RetroFitClientService
 import com.google.common.truth.Truth
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mockito
-import org.mockito.Mockito.spy
 
 
 class MainRepositoryTest{

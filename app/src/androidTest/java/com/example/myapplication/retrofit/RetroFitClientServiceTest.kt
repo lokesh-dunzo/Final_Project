@@ -1,4 +1,4 @@
-package com.example.myapplication.RetroFit
+package com.example.myapplication.retrofit
 
 import com.google.common.truth.Truth
 import org.junit.Assert

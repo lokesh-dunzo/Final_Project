@@ -1,10 +1,10 @@
-package com.example.myapplication.RecylerView
+package com.example.myapplication.recylerview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.myapplication.Repository.DogEntity
+import com.example.myapplication.repository.DogEntity
 import com.example.myapplication.databinding.RecylerImageBinding
 
 class MainViewHolder(val binding: RecylerImageBinding) : RecyclerView.ViewHolder(binding.root){
@@ -21,7 +21,11 @@ class Adaptor : RecyclerView.Adapter<MainViewHolder>() {
 
     fun setList(list : List<DogEntity>){
         this.dogList = list.toMutableList()
-        notifyDataSetChanged()
+        notifyItemRangeChanged(0,dogList.size-1)
+    }
+    fun addDogEntity(dogEntity: DogEntity){
+        dogList.add(dogEntity)
+        notifyItemInserted(dogList.size-1)
     }
     override fun getItemCount(): Int {
         return dogList.size
